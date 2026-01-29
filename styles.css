@@ -1,0 +1,280 @@
+@layer reset, base, components, utilities;
+
+@layer reset {
+  /* 1. Use a more-intuitive box-sizing model */
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+  /* 2. Remove default margin */
+  *:not(dialog) {
+    margin: 0;
+  }
+  /* 3. Enable keyword animations */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      interpolate-size: allow-keywords;
+    }
+  }
+  body {
+    /* 4. Add accessible line-height */
+    line-height: 1.5;
+    /* 5. Improve text rendering */
+    -webkit-font-smoothing: antialiased;
+  }
+  /* 6. Improve media defaults */
+  img,
+  picture,
+  video,
+  canvas,
+  svg {
+    display: block;
+    max-width: 100%;
+  }
+  /* 7. Inherit fonts for form controls */
+  input,
+  button,
+  textarea,
+  select {
+    font: inherit;
+  }
+  /* 8. Avoid text overflows */
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    overflow-wrap: break-word;
+  }
+  /* 9. Improve line wrapping */
+  p {
+    text-wrap: pretty;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    text-wrap: balance;
+  }
+  /*
+  10. Create a root stacking context
+*/
+  #root,
+  #__next {
+    isolation: isolate;
+  }
+}
+
+@layer base {
+  :root {
+    --clr-primary: #596d48;
+
+    --clr-neutral-50: #ffffff; /* pure white (sparingly) */
+    --clr-neutral-100: #f9fafb; /* soft white */
+    --clr-neutral-200: #f1f3f0; /* light surface */
+    --clr-neutral-300: #e1e4df; /* borders / dividers */
+    --clr-neutral-400: #c7cbc4; /* disabled, subtle UI */
+    --clr-neutral-500: #9aa093; /* secondary text */
+    --clr-neutral-600: #6f756a; /* muted text */
+    --clr-neutral-700: #4f544b; /* strong text */
+    --clr-neutral-800: #2f332c; /* headings / dark surfaces */
+    --clr-neutral-900: #1b1d19; /* near-black */
+    --clr-neutral-1000: #000000; /* pure black */
+
+    --clr-alert: 0 70% 50%; /* red */
+    --clr-focus: 210 80% 55%; /* blue */
+
+    --fw-400: 400;
+    --fw-700: 700;
+
+    --fs-50: 0.5rem; /* 8px  */
+    --fs-100: 0.5625rem; /* 9px  */
+    --fs-200: 0.625rem; /* 10px */
+    --fs-300: 0.6875rem; /* 11px */
+    --fs-400: 0.8125rem; /* 13px */
+    --fs-500: 1rem; /* 16px */
+    --fs-600: 1.25rem; /* 20px */
+
+    --space-1: 0.25rem; /* 4  – micro */
+    --space-2: 0.5rem; /* 8  – tight */
+    --space-3: 0.75rem; /* 12 – related */
+    --space-4: 1rem; /* 16 – default */
+    --space-5: 1.5rem; /* 24 – section */
+    --space-6: 2rem; /* 32 – large */
+    --space-7: 3rem; /* 48 – layout */
+  }
+
+  @font-face {
+    font-family: "Norse-Bold";
+    src: url("/font/Norse-Bold.otf") format("opentype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  body {
+    height: 100vh;
+    font-family: "Roboto", sans-serif;
+    font-size: var(--fs-400);
+    font-optical-sizing: auto;
+    font-weight: var(--fw-400);
+    color: var(--clr-neutral-800);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  a {
+    text-decoration: none;
+    color: var(--clr-primary);
+    font-weight: var(--fw-700);
+  }
+}
+
+@layer components {
+  main {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    width: 50rem;
+    height: 40rem;
+    background-color: var(--clr-neutral-200);
+    border-radius: var(--fs-400);
+    overflow: hidden;
+    box-shadow:
+      0 4.8px 14.4px rgba(0, 0, 0, 0.18),
+      0 25.6px 57.6px rgba(0, 0, 0, 0.22);
+  }
+
+  .left {
+    flex: 1;
+    position: relative;
+  }
+
+  .logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    height: 16%;
+    top: 20%;
+    background-color: rgb(from var(--clr-neutral-1000) r g b / 0.4);
+  }
+
+  .logo-container img {
+    height: 85%;
+    object-fit: contain;
+  }
+
+  .logo-letter {
+    color: var(--clr-neutral-50);
+    font-size: 4rem;
+    font-family: "Norse-Bold";
+    line-height: 1;
+    transform: translateY(0.6rem);
+  }
+
+  .left .bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .right {
+    flex: 1.5;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .sign-up-header {
+    margin-bottom: var(--space-5);
+    padding-left: var(--space-6);
+    padding-right: var(--space-6);
+  }
+
+  .sign-up-header p:first-child {
+    margin-bottom: var(--space-4);
+  }
+
+  form {
+    width: 100%;
+  }
+
+  .sign-up-form {
+    background-color: var(--clr-neutral-50);
+    padding-left: var(--space-6);
+    padding-top: var(--space-4);
+    padding-bottom: var(--space-5);
+    /* x-offset | y-offset | blur-radius | spread-radius | color */
+    box-shadow: 0px 4px 10px rgb(from var(--clr-neutral-800) r g b / 0.1);
+    width: 100%;
+    margin-bottom: var(--space-5);
+  }
+
+  .form-row {
+    display: flex;
+    gap: var(--space-7);
+    margin-top: var(--space-4);
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  input {
+    height: 1.5rem;
+    width: 10rem;
+    border: var(--clr-neutral-300) solid 1px;
+    border-radius: var(--space-1);
+    outline: none;
+  }
+
+  input:focus {
+    border-color: hsl(var(--clr-focus));
+    box-shadow: 0px 4px 10px rgb(from var(--clr-neutral-800) r g b / 0.1);
+  }
+
+  input:user-invalid {
+    border-color: hsl(var(--clr-alert));
+  }
+
+  label {
+    font-size: var(--fs-300);
+  }
+  .sign-up-form + button {
+    padding: var(--space-2) var(--space-6);
+    background-color: var(--clr-primary);
+    color: var(--clr-neutral-50);
+    font-weight: var(--fw-700);
+    border-radius: var(--fs-50);
+    margin-left: var(--space-6);
+    width: 10rem;
+    border: none;
+    box-shadow: 0px 4px 10px rgb(from var(--clr-neutral-800) r g b / 0.1);
+    margin-bottom: var(--space-5);
+    cursor: pointer;
+  }
+
+  .auth-message {
+    padding-left: var(--space-6);
+  }
+}
+
+@layer utilities {
+  .fs-500 {
+    font-size: var(--fs-500);
+  }
+
+  .fw-700 {
+    font-weight: var(--fw-700);
+  }
+}
