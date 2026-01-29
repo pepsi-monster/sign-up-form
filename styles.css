@@ -111,7 +111,7 @@
 
   @font-face {
     font-family: "Norse-Bold";
-    src: url("/font/Norse-Bold.otf") format("opentype");
+    src: url("font/Norse-Bold.otf") format("opentype");
     font-weight: 700;
     font-style: normal;
     font-display: swap;
